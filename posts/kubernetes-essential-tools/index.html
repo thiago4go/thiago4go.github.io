@@ -120,15 +120,15 @@
   </section>
 
   <section id="gif">
-  <img src="/images/kubernetes-essential-tools.gif" alt="Kubernetes Essential Tools" style="display: block; margin-left: auto; margin-right: auto;">
-
+  <img src="/images/kubernetes-essential-tools.gif" alt="Kubernetes Essential Tools" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+  </section>
   <section id="cli-tools">
     <h2>Command Line Tools</h2>
     <div class="tool">
         <h3>kubectl</h3>
         <p><strong>kubectl</strong> is the quintessential command-line tool for interacting with Kubernetes clusters, allowing users to deploy applications, inspect and manage cluster resources, and view logs. It is compatible with any operating system that supports Kubernetes, offering a versatile toolkit for Kubernetes management.</p>
         <strong>Usage:</strong>
-        <div style="width: 50%; margin: right;">
+        <div style="width: 80%; margin: right;">
           <pre><code>
 kubectl get pods
 kubectl describe pod my-pod
@@ -141,7 +141,7 @@ kubectl logs my-pod
         <h3>kubie</h3>
         <p><strong>kubie</strong> is a more context-aware CLI tool designed to improve the Kubernetes user experience. It simplifies context switching and namespace management, making it easier for users to work with multiple clusters or namespaces without losing track of their current operational context.</p>
         <strong>Usage:</strong>
-        <div style="width: 50%; margin: right;">
+        <div style="width: 80%;max-width: 100%; margin: right;">
 
           <pre><code>
 kubie ctx
@@ -154,7 +154,7 @@ kubie ns
         <h3>k9s</h3>
         <p><strong>k9s</strong> provides a terminal-based UI to interact with your Kubernetes clusters, making it easier to monitor and manage your cluster's resources. It enhances the kubectl experience by offering a more interactive and visually appealing interface, improving efficiency and productivity for Kubernetes administrators and developers.</p>
         <strong>Usage:</strong>
-          <div style="width: 50%; margin: right;">
+          <div style="width: 80%; max-width: 100%; margin: right;">
             <pre><code>
 k9s
             </code></pre>
