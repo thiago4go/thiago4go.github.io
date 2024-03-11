@@ -15,3 +15,9 @@
     background-repeat: no-repeat;
     background-size: auto 500px; /* Ensures the image's height is maintained at 500px */
 }
+
+@media screen and (max-width: 600px) {
+    .header-image {
+        width: 50%; /* Set the width to half when the screen size is 600px or less */
+    }
+}
