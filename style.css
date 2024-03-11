@@ -8,6 +8,7 @@
 
  .header-image {
     flex: none;
+    padding: 20px;
     width: 500px; /* Adjust the width as per your requirement */
     height: 180px; /* As we want to show only 1/3 of the 500px height */
     background-image: url('logo.png');
@@ -18,6 +19,7 @@
 
 @media screen and (max-width: 600px) {
     .header-image {
-        width: 50%; /* Set the width to half when the screen size is 600px or less */
+        flex: none;
+        background-size: auto 300px;
     }
 }
