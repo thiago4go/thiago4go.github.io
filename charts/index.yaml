@@ -2,13 +2,13 @@ apiVersion: v1
 entries:
   k8sug-chatbot:
   - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2024-05-25T14:28:57.69938327+10:00"
-    description: A Helm chart for Kubernetes
-    digest: b49718f53cb62e70d1a38f668307f7b5228e25e72a3de69a0f5410b33a93797a
+    appVersion: 1.0.2
+    created: "2024-05-25T14:45:39.265807311+10:00"
+    description: Godel 1.1 chatbot for Kubernetes
+    digest: 61d2c7e50c7e614132c4b7b9d331249df0e1eacb9a188119bdffdd2d4a6d666d
     name: k8sug-chatbot
     type: application
     urls:
-    - https://thiago4go.github.io/charts/k8sug-chatbot-0.1.0.tgz
-    version: 0.1.0
-generated: "2024-05-25T14:28:57.698867354+10:00"
+    - https://thiago4go.github.io/charts/k8sug-chatbot-0.0.3.tgz
+    version: 0.0.3
+generated: "2024-05-25T14:45:39.265206189+10:00"
