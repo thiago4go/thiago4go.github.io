@@ -3,12 +3,12 @@ entries:
   k8sug-chatbot:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2024-05-25T18:59:46.805712604+10:00"
+    created: "2024-05-25T19:14:10.673508175+10:00"
     description: Godel 1.1 chatbot for Kubernetes
-    digest: 6c9b1ef8b3be5132fbceceb57a0dfb542fa507be162a89b761168557c5eff63e
+    digest: 964bdfa8dc967546f4623141e96d01ba139cfaab996dfb7d2304ad0c1f416a2c
     name: k8sug-chatbot
     type: application
     urls:
-    - https://thiago4go.github.io/charts/k8sug-chatbot-0.1.0.tgz
-    version: 0.1.0
-generated: "2024-05-25T18:59:46.804921935+10:00"
+    - https://thiago4go.github.io/charts/k8sug-chatbot-0.1.1.tgz
+    version: 0.1.1
+generated: "2024-05-25T19:14:10.672002054+10:00"
