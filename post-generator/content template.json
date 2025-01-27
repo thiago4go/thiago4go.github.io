@@ -1,0 +1,11 @@
+{
+    "POST_DESCRIPTION": "An inspiring story about ongoing education.",
+    "POST_TITLE": "Embracing Ongoing Education",
+    "POST_DATE": "2024-04-24",
+    "READING_TIME": "2 min read",
+    "POST_INTRO": "This quote from Confucius has helped me find my way on the path of continuously learning...",
+    "POST_CONTENT": "<section id=\"resources\">\n    <h2>Resources to Continue Learning</h2>\n    <ul>\n        <li>LinkedIn Learning</li>\n        <li>Coursera</li>\n        <li>Udemy</li>\n    </ul>\n    <pre><code>print(\"Hello, Continuous Learners!\")</code></pre>\n</section>",
+    "POST_CONCLUSION": "Learning is an ongoing journey, and embracing it can lead to amazing transformations.",
+    "POST_TAGS": "Ongoing Education | Personal Growth | Continuous Learning",
+    "POST_WORD_COUNT": "477"
+  }

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta itemprop="name" content="Back to the Dev" />
+    <meta itemprop="description" content="A deep dive into turning a second-hand laptop into a portable homelab using Windows 10, Hyper-V, and nested Proxmox—complete with real-world troubleshooting, future VLAN experiments, and a nod to Kubernetes and IaC." />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://thiago4go.github.io/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://thiago4go.github.io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://thiago4go.github.io/favicon-16x16.png" />
+    <link rel="shortcut icon" href="https://thiago4go.github.io/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="https://thiago4go.github.io/style.css"/>
+    <title>Homelab Adventures: Nested Proxmox on a Budget Laptop</title>
+  </head>
+
+  <body id="page">
+    <header id="site-header" class="animated slideInUp faster">
+      <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+          <div class="site-branding">
+            <a href="https://thiago4go.github.io">Back to the Dev</a>
+          </div>
+          <nav class="site-nav hide-in-mobile">
+            <a href="https://thiago4go.github.io/posts">Posts</a>
+            <a href="https://thiago4go.github.io/about">About</a>
+          </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+          <span class="hdr-social hide-in-mobile">
+            <!-- Social links -->
+            <a href="https://www.linkedin.com/in/thiago4go" target="_blank" rel="noopener me" title="linkedin">
+              <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="https://github.com/thiago4go" target="_blank" rel="noopener me" title="github">
+              <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </a>
+          </span>
+          <button id="menu-btn" class="hdr-btn" title="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="animated fast">
+      <ul>
+        <li><a href="https://thiago4go.github.io/posts">Posts</a></li>
+        <li><a href="https://thiago4go.github.io/about">About</a></li>
+      </ul>
+    </div>
+
+    <main class="site-main section-inner animated fadeIn faster">
+      <article class="thin">
+        <header class="post-header">
+          <div class="post-meta">
+            <span>2025-01-27</span>
+            <small> - 
+              <span class="reading-time" title="Estimated read time">12 min read</span>
+            </small>
+          </div>
+          <h1>Homelab Adventures: Nested Proxmox on a Budget Laptop</h1>
+        </header>
+
+        <section id="intro">
+          <p>Sometimes, building a homelab is less about having perfect hardware and more about learning to innovate within constraints. By starting with an AUD 75 laptop, we’re proving that you don’t need the latest-and-greatest server gear to master cloud-native and DevOps tools. This post covers how we set up Windows 10 Pro as a base, installed Proxmox in a nested environment, tackled some serious networking hurdles, and laid the groundwork for future Kubernetes, VLAN, and IaC explorations.</p>
+        </section>
+
+        <section id="content">
+          <section id="key-principles">
+<h2>Key Principles</h2>
+<ul>
+    <li><strong>Start small, iterate often.</strong> Rapid experimentation leads to quicker learning.</li>
+    <li><strong>Use secondhand/affordable gear.</strong> Proves you don’t need expensive hardware to explore advanced topics.</li>
+    <li><strong>Hands-on troubleshooting over perfection.</strong> Real learning comes from fixing things that break.</li>
+</ul>
+</section>
+
+<section id="day-0-budget-hardware">
+<h2>Day 0: Acquiring Budget Hardware</h2>
+<p><strong>Action:</strong> Bought a <em>Dell Latitude E7240 Ultrabook</em> for AUD 75 via Facebook Marketplace.</p>
+<p><strong>Reason:</strong> Low-cost entry point for a dedicated homelab—2 cores, 16 GB RAM, and an SSD are enough to run nested virtual machines and experiment with various tools.</p>
+<p><strong>Value:</strong> Portable, quiet, and inexpensive to run in a home environment, making it ideal for both portability and 24/7 operation.</p>
+
+<div class="CodeSnippet"><pre><code>Hardware Specs Recap:
+• Purchase Price: AUD $75
+• CPU: Intel Core i7-4600U (2C/4T)
+• RAM: 16GB DDR3L
+• Storage: 256GB SSD
+• Approx. Power Draw: 15W idle, up to 45W under load</code></pre></div>
+</section>
+
+<section id="base-os-and-virtualisation">
+<h2>Deciding on Base OS & Virtualisation</h2>
+<p><strong>Chosen OS:</strong> Windows 10 Pro</p>
+<p><strong>Reason:</strong> Familiarity (still run Windows tools), plus Hyper-V integration for quick VM provisioning. Using Windows also enables convenient snapshotting and easy bridging with the rest of the home network.</p>
+<p><strong>Alternative Consideration:</strong> Bare-metal Proxmox. Ultimately, we decided on Windows 10 first to minimize downtime and keep certain workflows. Proxmox will run as a nested VM inside Hyper-V.</p>
+</section>
+
+<section id="day-1-proxmox-nested">
+<h2>Day 1: Proxmox on a Potato (Nested!)</h2>
+<p><strong>Action:</strong> Installed Proxmox inside Hyper-V. <br/>
+<strong>Reason:</strong> Proxmox is a popular hypervisor for homelabs, offering extensive features like clustering, ZFS support, and advanced networking. <br/>
+<strong>Outcome:</strong> Ran into tricky network complications related to bridging and NAT in a nested environment.</p>
+</section>
+
+<section id="network-challenges">
+<h3>Identified Network Complications</h3>
+<p><strong>Problem:</strong> Bridging for Proxmox VMs inside Hyper-V can cause connectivity issues—like trouble obtaining IP addresses or exposing services externally. Nested virtualisation often restricts certain kernel-level features and can add complexity to networking.</p>
+<p><em>Decision:</em> Continue with Windows 10 + Hyper-V for now, but refine network config meticulously.</p>
+</section>
+
+<section id="step-by-step-setup">
+<h2>Step-by-Step Setup & Troubleshooting</h2>
+
+<h3>1. Create the Internal Virtual Switch in Hyper-V</h3>
+<ol>
+    <li>Open <strong>Hyper-V Manager</strong> → <strong>Virtual Switch Manager</strong> → <em>New Virtual Switch</em>.</li>
+    <li>Name it: <code>Proxmox-Lab</code>.</li>
+    <li>Select <strong>Internal</strong>.</li>
+    <li>Check "Enable virtual LAN identification" if you plan on using VLANs later.</li>
+    <li>Click <em>OK</em>.</li>
+</ol>
+
+<section id="png">
+  <img src="/images/home-lab/virtual-switch.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+  </section>
+
+
+<div class="CodeSnippet"><pre><code>Example Configuration:
+Switch Name: Proxmox-Lab
+Type: Internal
+VLAN ID: Optional (future use)
+</code></pre></div>
+
+<h3>2. Download & Create Proxmox VM in Hyper-V</h3>
+<ol>
+    <li>Download the <a href="https://www.proxmox.com/en/downloads">Proxmox VE ISO</a>.</li>
+    <li>Open <strong>Hyper-V Manager</strong>.</li>
+    <li>Right-click your host → <strong>New → Virtual Machine</strong>.</li>
+    <li><strong>Name:</strong> Proxmox-VM (or similar).</li>
+    <li><strong>Generation:</strong> 2 (required for UEFI support).</li>
+    <li><strong>Memory:</strong> 8 GB static allocation (dynamic can cause odd issues with nested VMs).</li>
+    <li><strong>Network:</strong> Select the <code>Proxmox-Lab</code> internal switch.</li>
+    <li><strong>Virtual Disk:</strong> 128GB (or as large as your SSD can handle).</li>
+    <li><strong>Installation Source:</strong> Point to the Proxmox ISO.</li>
+</ol>
+
+<section id="png">
+  <img src="/images/home-lab/new-vm-wizard.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+  </section>
+
+<h3>3. Adjust VM Settings</h3>
+
+<h4>3.1 Enable Nested Virtualization</h4>
+<div class="CodeSnippet"><pre><code># In Administrator PowerShell:
+Set-VMProcessor -VMName "Proxmox-VM" -ExposeVirtualizationExtensions $true
+</code></pre></div>
+<p>If you skip this step, you may encounter errors indicating that Proxmox can’t detect virtualization extensions during installation.</p>
+
+<h4>3.2 Allocate More Virtual Processors</h4>
+<div class="CodeSnippet"><pre><code>Set-VM -VMName "Proxmox-VM" -ProcessorCount 4
+</code></pre></div>
+<p>Adjust based on your laptop’s CPU core/thread availability.</p>
+
+<h3>4. Install Proxmox</h3>
+<p>Boot the VM and follow the on-screen instructions. When prompted for network configuration, use the table below.</p>
+
+<table>
+    <thead>
+        <tr><th>Field</th><th>Suggested Value</th><th>Explanation</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Management Interface</td>
+            <td><code>eth0</code> (default)</td>
+            <td>This is the interface connected to the <code>Proxmox-Lab</code> switch in Hyper-V.</td>
+        </tr>
+        <tr>
+            <td>Hostname (FQDN)</td>
+            <td><code>proxmox.lab</code></td>
+            <td>Use a dummy domain like <code>.lab</code> for homelab use.</td>
+        </tr>
+        <tr>
+            <td>IP Address (CIDR)</td>
+            <td><code>192.168.10.10/24</code></td>
+            <td>Static IP for Proxmox. We’ll NAT from <code>192.168.10.0/24</code>.</td>
+        </tr>
+        <tr>
+            <td>Gateway Address</td>
+            <td><code>192.168.10.1</code></td>
+            <td>Windows host’s NAT IP—essential for external connectivity.</td>
+        </tr>
+        <tr>
+            <td>DNS Server</td>
+            <td><code>8.8.8.8</code> (Google) or <code>1.1.1.1</code> (Cloudflare)</td>
+            <td>Ensure reliable external DNS for updates, package installs, etc.</td>
+        </tr>
+    </tbody>
+</table>
+
+<section id="png">
+  <img src="/images/home-lab/installing-1.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+  </section>
+  <section id="png">
+    <img src="/images/home-lab/installing-2.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+    </section>
+    <section id="png">
+      <img src="/images/home-lab/installing-3.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+      </section>
+</section>
+
+<section id="network-troubleshooting">
+<h2>Networking: Detailed Troubleshooting</h2>
+<p>After installation, you might discover that your Proxmox VM can’t access the internet or the local network. Here’s the deep dive on fixing that.</p>
+<section id="png">
+  <img src="/images/home-lab/pos-installing.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+  </section>
+<h3>Check /etc/network/interfaces</h3>
+<div class="CodeSnippet"><pre><code>nano /etc/network/interfaces
+
+# Example Configuration:
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet manual
+
+auto vmbr0
+iface vmbr0 inet static
+  address 192.168.10.10/24
+  gateway 192.168.10.1
+  bridge-ports eth0
+  bridge-stp off
+  bridge-fd 0
+  dns-nameservers 8.8.8.8
+</code></pre></div>
+
+<h3>Verify Proxmox-Lab NAT on Windows Host</h3>
+<div class="CodeSnippet"><pre><code># In PowerShell, check if the NAT is set correctly:
+Get-NetNat -Name "ProxmoxNAT" | Select InternalIPInterfaceAddressPrefix
+
+# Expected: 192.168.10.0/24
+</code></pre></div>
+
+<p>If not configured:</p>
+<div class="CodeSnippet"><pre><code># Remove existing NAT (if any)
+Remove-NetNat -Name "ProxmoxNAT" -Confirm:$false -ErrorAction SilentlyContinue
+
+# Create a new NAT rule:
+New-NetNat -Name "ProxmoxNAT" -InternalIPInterfaceAddressPrefix "192.168.10.0/24"
+</code></pre></div>
+
+<h3>Assign Static IP 192.168.10.1 to vEthernet (Proxmox-Lab)</h3>
+<div class="CodeSnippet"><pre><code># Remove existing IP (if any)
+Remove-NetIPAddress -InterfaceAlias "vEthernet (Proxmox-Lab)" -Confirm:$false
+
+# Assign static IP
+New-NetIPAddress -InterfaceAlias "vEthernet (Proxmox-Lab)" -IPAddress 192.168.10.1 -PrefixLength 24
+</code></pre></div>
+
+<h3>Enable Internet Sharing on the Host</h3>
+<ol>
+    <li>Open <strong>Control Panel → Network Connections</strong>.</li>
+    <li>Right-click your main <strong>Wi-Fi/Ethernet adapter</strong> → <strong>Properties → Sharing</strong>.</li>
+    <li>Check <em>"Allow other network users to connect"</em> and select <code>vEthernet (Proxmox-Lab)</code> from the dropdown.</li>
+    <li>Restart the Proxmox-Lab adapter:<br/>
+    <div class="CodeSnippet"><pre><code>Restart-NetAdapter -Name "vEthernet (Proxmox-Lab)"
+</code></pre></div>
+    </li>
+</ol>
+
+<h3>Firewall & DNS Checks</h3>
+<ol>
+    <li><strong>Enable ICMP inbound:</strong>
+<div class="CodeSnippet"><pre><code>New-NetFirewallRule -DisplayName "Allow ICMPv4" -Direction Inbound -Protocol ICMPv4 -IcmpType 8 -Action Allow
+</code></pre></div>
+    </li>
+    <li><strong>Edit DNS settings in Proxmox:</strong>
+<div class="CodeSnippet"><pre><code>nano /etc/resolv.conf
+
+# Add or confirm:
+nameserver 8.8.8.8
+nameserver 1.1.1.1
+</code></pre></div>
+    </li>
+    <li><strong>Open Proxmox Web UI port:</strong>
+<div class="CodeSnippet"><pre><code>New-NetFirewallRule -DisplayName "Proxmox Web UI" -Direction Inbound -LocalPort 8006 -Protocol TCP -Action Allow
+</code></pre></div>
+    </li>
+</ol>
+
+<p>Now, <code>ping 192.168.10.1</code> and <code>ping 8.8.8.8</code> from the Proxmox VM. If both work, you’re in business!</p>
+</section>
+
+<section id="png">
+  <img src="/images/home-lab/proxmox-login.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+  </section>
+  <section id="png">
+    <img src="/images/home-lab/proxmox-gui.png" alt="Project Lifecycle" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+    </section>
+    
+
+<section id="final-network-summary">
+<h2>Final Network Configuration Summary</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Component</th>
+            <th>Configuration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Hyper-V Switch</strong> (<em>Proxmox-Lab</em>)</td>
+            <td>Static IP on host side: <code>192.168.10.1/24</code></td>
+        </tr>
+        <tr>
+            <td><strong>Proxmox Host</strong></td>
+            <td>Static IP: <code>192.168.10.10/24</code>, Gateway: <code>192.168.10.1</code></td>
+        </tr>
+        <tr>
+            <td><strong>NAT Subnet</strong></td>
+            <td><code>192.168.10.0/24</code></td>
+        </tr>
+    </tbody>
+</table>
+</section>
+
+<section id="vlan-tests">
+<h2>Why Enable VLAN ID on the Hyper-V Switch?</h2>
+<p>Even if you don’t need VLANs <em>right now</em>, enabling VLAN ID will help you practice advanced networking scenarios in the future:</p>
+<ul>
+    <li><strong>DirectConnect Emulation:</strong> Simulate AWS/Azure DirectConnect (private VLANs over dedicated lines).</li>
+    <li><strong>QinQ (802.1ad):</strong> Experiment with VLAN stacking for carrier-grade network scenarios.</li>
+    <li><strong>Multi-Tenant Labs:</strong> Isolate different Kubernetes clusters or DevOps tools in separate VLANs.</li>
+</ul>
+
+<div class="CodeSnippet"><pre><code># Applying VLAN ID to a Hyper-V VM
+Set-VMNetworkAdapterVlan -VMName "Proxmox-VM" -Access -VlanId 10
+
+# In Proxmox, ensure:
+bridge-vlan-aware yes
+bridge-vids 2-4094
+</code></pre></div>
+</section>
+
+<section id="conclusion-and-next-steps">
+<h2>Next Steps: Kubernetes, IaC, & VLAN Experiments</h2>
+<p>With our nested Proxmox environment running on a humble Dell Latitude, we now have a flexible setup for more advanced projects:</p>
+<ul>
+    <li><strong>Kubernetes Deployment:</strong> Spin up a small cluster in Proxmox VMs, explore a CNI (e.g., Calico or Flannel), and delve into Pod networking in a nested lab.</li>
+    <li><strong>Infrastructure as Code (IaC):</strong> Use tools like Terraform and Ansible to automate provisioning and configuration. This is an excellent next step to refine your DevOps skillset.</li>
+    <li><strong>Deep VLAN Config:</strong> Separate labs or apps on different VLANs to practice more advanced networking and micro-segmentation.</li>
+</ul>
+<p>There’s still plenty to learn, and the entire networking arena can get overwhelming. Take it one step at a time, and remember the principle: <strong>fail fast, learn relentlessly</strong>.</p>
+<p><em>Do you have any Cloud Native projects in mind that you’d like to see tested on this potato-laptop lab?</em> Feel free to share your ideas—whether it’s ephemeral Kubernetes clusters, custom CI/CD pipelines, or specific open-source platforms. Let’s explore them together!</p>
+</section>
+
+        </section>
+
+        <section id="conclusion">
+          <h2>Conclusion</h2>
+          <p>This nested Proxmox homelab might not be perfect, but it’s a testament to how resourceful we can be with secondhand gear and open-source software. By embracing occasional headaches—like NAT bridging and VLAN confusion—we grow stronger in our sysadmin and DevOps skills. The journey’s only begun. Next up, let’s tackle Kubernetes, get serious with IaC, and eventually master VLANs. Keep building, keep exploring, and keep learning!</p>
+        </section>
+
+        <footer class="post-info">
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+            Homelab | Proxmox | Windows 10 Pro | Cloud Native | DevOps</p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1500 Words</p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2025-01-27</p>
+        </footer>
+
+        <div class="post-nav thin">
+          <a class="prev-post" href="https://thiago4go.github.io/posts/project-management/" style="text-align: left;">
+            <span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></span><br>
+            <span>Project Lifecycle in Software Development</span>
+          </a>
+          <a class="prev-post" href="https://thiago4go.github.io/posts/">
+            <span class="post-nav-label">Newer&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br>
+            <span>Posts</span>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <footer id="site-footer" class="section-inner thin animated fadeIn faster">
+      <p>&copy; 2025 <a href="https://thiago4go.github.io">thiago4go</a> &#183; <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
+      <p>Made with <a href="https://www.getzola.org" target="_blank" rel="noopener">Zola</a> &#183; Theme <a href="https://github.com/VersBinarii/hermit_zola" target="_blank" rel="noopener">Hermit_Zola</a></p>
+    </footer>
+
+    <script src="https://thiago4go.github.io/js/main.js"></script>
+  </body>
+</html>
