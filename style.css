@@ -24,6 +24,14 @@
     }
 }
 
+
+code {
+    background-color: #bbbfd4;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+
 .CodeSnippet {
     background-color: #3b4042;
     border: 1px solid #ddd;

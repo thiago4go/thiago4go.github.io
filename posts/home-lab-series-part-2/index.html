@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta itemprop="name" content="Back to the Dev" />
+    <meta itemprop="description" content="A comprehensive guide to setting up a dual-stack (IPv4 + IPv6) private subnet inside Proxmox using nftables for NAT, while Proxmox is nested under Hyper-V." />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://thiago4go.github.io/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://thiago4go.github.io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://thiago4go.github.io/favicon-16x16.png" />
+    <link rel="shortcut icon" href="https://thiago4go.github.io/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="https://thiago4go.github.io/style.css"/>
+    <title>Homelab Adventures: Solving the Networking Puzzle with Dual-Stack IPv4 and IPv6</title>
+  </head>
+
+  <body id="page">
+    <header id="site-header" class="animated slideInUp faster">
+      <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+          <div class="site-branding">
+            <a href="https://thiago4go.github.io">Back to the Dev</a>
+          </div>
+          <nav class="site-nav hide-in-mobile">
+            <a href="https://thiago4go.github.io/posts">Posts</a>
+            <a href="https://thiago4go.github.io/about">About</a>
+          </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+          <span class="hdr-social hide-in-mobile">
+            <!-- Social links -->
+            <a href="https://www.linkedin.com/in/thiago4go" target="_blank" rel="noopener me" title="linkedin">
+              <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="https://github.com/thiago4go" target="_blank" rel="noopener me" title="github">
+              <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </a>
+          </span>
+          <button id="menu-btn" class="hdr-btn" title="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="animated fast">
+      <ul>
+        <li><a href="https://thiago4go.github.io/posts">Posts</a></li>
+        <li><a href="https://thiago4go.github.io/about">About</a></li>
+      </ul>
+    </div>
+
+    <main class="site-main section-inner animated fadeIn faster">
+      <article class="thin">
+        <header class="post-header">
+          <div class="post-meta">
+            <span>2025-01-29</span>
+            <small> - 
+              <span class="reading-time" title="Estimated read time">10 min read</span>
+            </small>
+          </div>
+          <h1>Homelab Adventures: Solving the Networking Puzzle with Dual-Stack IPv4 and IPv6</h1>
+        </header>
+
+        <section id="intro">
+          <p>Welcome back to Homelab Adventures! This is day 2, we’re tackling one of the most satisfying (and occasionally hair-pulling) challenges in homelab networking: creating a dual-stack IPv4/IPv6 private subnet inside a Proxmox VM that’s itself nested under Hyper-V. </p>
+          <p>Why? Imagine running a K8s cluster where pods communicate over IPv6 while legacy services still rely on IPv4. Or hosting microservices that are ready for the future. Let’s solve this puzzle!</p>
+        </section>
+
+        <section id="content">
+          <section id="high-level-overview">
+    <h2>The Scenario: A Triple-Level Networking Cake</h2>
+    <ul>
+        <li><strong>Host Windows 10 + Hyper-V (level 1):</strong> Provides an Internal Switch with ICS on 192.168.10.1 (IPv4). The Proxmox VM (level 2) gets 192.168.10.10 from this network.</li>
+        <li><strong>Proxmox VM (Level 2):</strong> Has vmbr0 with IPv4 192.168.10.10/24, gateway 192.168.10.1. Creates vmbr1 for private IPv4 and ULA IPv6, uses nftables for NAT, and runs dnsmasq for DHCP and RA services.</li>
+        <li><strong>Guest VMs / LXCs (Level 3):</strong> Attach to vmbr1, receive DHCP for IPv4 and SLAAC/DHCPv6 for IPv6, and communicate internally and externally via NAT.</li>
+    </ul>
+
+    <h3>The goal? Let your inner VMs/LXCs:</h3>
+    <ul>
+        <li>Get IPv4 (192.168.200.x) and IPv6 ULA (fdc0:1234:abcd::/64) addresses automatically.</li>
+        <li>NAT out to the internet via Proxmox’s vmbr0.</li>
+        <li>Avoid Hyper-V MAC spoofing issues by keeping everything behind Proxmox’s single NIC.</li>
+    </ul>
+
+</section>
+
+<section id="step-1">
+    <h2>Step 1: Ensure Your Current Proxmox Network (vmbr0) is Working</h2>
+    <div class="CodeSnippet"><pre><code>ip a show vmbr0
+ping -c 3 8.8.8.8
+ping -c 3 google.com</code></pre></div>
+</section>
+
+<section id="step-2">
+    <h2>Step 2: Create vmbr1 for Private IPv4 + IPv6</h2>
+    <h3>2.1 Add Configuration</h3>
+    <p>Append to <code>/etc/network/interfaces</code>:</p>
+    <div class="CodeSnippet"><pre><code>auto vmbr1
+iface vmbr1 inet static
+    address 192.168.200.1/24
+    bridge-ports none
+    bridge-stp off
+    bridge-fd 0
+
+iface vmbr1 inet6 static
+    address fdc0:1234:abcd::1/64</code></pre></div>
+    <h3>2.2 Bring Up the Interface</h3>
+    <strong>Pro Tip:</strong> Generate a random ULA with  <kbd>openssl rand -hex 5</kbd> to avoid conflicts.
+Restart networking:
+    <div class="CodeSnippet"><pre><code>systemctl restart networking
+ip addr show vmbr1  # Verify both IPs exist  </code></pre></div>
+</section>
+
+<section id="step-3">
+    <h2>Step 3: Enable IP Forwarding</h2>
+    <p>3.1 Edit <code>/etc/sysctl.conf</code> to ensure:</p>
+
+    <div class="CodeSnippet"><pre><code>net.ipv4.ip_forward=1
+net.ipv6.conf.all.forwarding=1</code></pre></div>
+    <p>3.2 Apply the changes:</p>
+    <div class="CodeSnippet"><pre><code>sysctl -p</code></pre></div>
+    <p>This allows traffic forwarding/routing between interfaces for both IPv4 and IPv6.</p>
+</section>
+
+<section id="step-4">
+    <h2>Step 4: Configure nftables for Dual-Stack NAT</h2>
+    <p>Why nftables? It’s modern, flexible, and replaces iptables. We’ll use it to masquerade traffic from <code>vmbr1</code> to <code>vmbr0</code>.</p>
+    <h3>4.1 Install nftables</h3>
+    <div class="CodeSnippet"><pre><code>apt-get install nftables -y
+</code></pre></div>
+    <h3>4.2 Configure <code>/etc/nftables.conf</code></h3>
+    <div class="CodeSnippet"><pre><code>#!/usr/sbin/nft -f
+flush ruleset
+
+# ----- IPv4 NAT table -----
+table ip nat {
+    chain prerouting {
+        type nat hook prerouting priority 0; policy accept;
+        # (Optional) Add DNAT rules here for port forwarding
+        # e.g. tcp dport 2222 iif "vmbr0" dnat to 192.168.200.50:22
+    }
+
+    chain postrouting {
+        type nat hook postrouting priority 100; policy accept;
+        # Masquerade IPv4 from 192.168.200.0/24 going out vmbr0
+        ip saddr 192.168.200.0/24 oif "vmbr0" masquerade
+    }
+} 
+
+# ----- IPv6 NAT table (NAT66, optional) -----
+
+</code></pre></div>
+<p>NAT66 is non-standard and the upstream doesn't provide public IPv6, this won't truly give global v6 access. Skip it since we only need internal ULA.</p>
+<h3>4.3 Apply the Configuration</h3>
+    <div class="CodeSnippet"><pre><code>nft -f /etc/nftables.conf
+nft list ruleset</code></pre></div>
+
+<div class="Troubleshooting">
+    <h3>4.4 Fix the “Interface Does Not Exist” Error</h3>
+    <p>Proxmox starts nftables too early, before vmbr0 exists. Solve this with a custom service</p>
+    <section id="png">
+      <img src="/images/home-lab/interface-error.png" alt="Interface Error" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;">
+      </section>
+
+      <h4>4.4.1 Create a Wait Script</h4>
+<p>For instance, <code>/usr/local/bin/wait-for-vmbr0.sh</code>:</p>
+<div class="CodeSnippet"><pre><code>#!/bin/bash
+while ! ip link show vmbr0; do sleep 1; done  
+systemctl restart nftables
+</code></pre></div>
+
+<h4>4.4.2 Make it executable</h4>
+<div class="CodeSnippet"><pre><code>chmod +x /usr/local/bin/wait-for-vmbr0.sh</code></pre></div>
+
+<h4>4.4.3 Create a Systemd Service</h4>
+<p>For instance, <code>/etc/systemd/system/nftables-late.service</code>:</p>
+<div class="CodeSnippet"><pre><code>[Unit]
+Description=Load nftables rules after vmbr0 is up
+After=network.target pve-firewall.service
+Wants=network.target pve-firewall.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/wait-for-vmbr0.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div>
+
+<h4>4.4.4 Enable and Start the Service</h4>
+<div class="CodeSnippet"><pre><code>systemctl daemon-reload
+systemctl enable nftables-late.service
+systemctl start nftables-late.service</code></pre></div>
+<p>On boot, this service will run your script, wait for vmbr0, then apply the nft rules</p>
+</div>
+
+
+
+</section>
+
+<section id="step-5">
+    <h2>Step 5: Install dnsmasq for DHCP</h2>
+    <div class="CodeSnippet"><pre><code>apt-get install dnsmasq -y</code></pre></div>
+    <h3>5.1 Edit configuration for <code>/etc/dnsmasq.d/vmbr1.conf</code>:</h3>
+    <div class="CodeSnippet"><pre><code># Listen on vmbr1 only
+interface=vmbr1
+
+# ---- IPv4 DHCP ----
+# IP range in 192.168.200.x
+dhcp-range=192.168.200.100,192.168.200.200,12h
+# Gateway (router) option
+dhcp-option=3,192.168.200.1
+# DNS server for IPv4 clients
+dhcp-option=6,8.8.8.8,1.1.1.1
+
+# ---- IPv6 DHCP/RA ----
+# ULA prefix: fdc0:1234:abcd::/64
+# For SLAAC + RA:
+# Provide addresses from e.g. fdc0:1234:abcd::100 to ...::200
+dhcp-range=::100,::200,constructor:vmbr1,64,12h
+# Optionally advertise your gateway's IPv6 address as DNS
+dhcp-option=option6:dns-server,[fdc0:1234:abcd::1]</code></pre></div>
+
+<h3>5.2 Enable & Start dnsmasq:</h3>
+<div class="CodeSnippet"><pre><code>systemctl enable dnsmasq
+systemctl start dnsmasq</code></pre></div>
+<p>Now, your VMs/LXCs will get IPv4 and IPv6 addresses automatically!</p>
+
+</section>
+
+<section id="step-6">
+    <h2>Step 6: Validate setup with a VM/LCX</h2>
+    <h3>6.1 Create a LXC attached to vmbr1</h3>
+    <div class="CodeSnippet"><pre><code>pct create 101 local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst \
+      --hostname mycontainer \
+      --net0 name=eth0,bridge=vmbr1,ip=dhcp \
+      --storage local-lvm \
+      --cores 1 --memory 512</code></pre></div>
+      <h3>6.2 Validate Connectivity</h3>
+    <div class="CodeSnippet"><pre><code>pct start 101 #to start the container
+pct enter 101 #to enter the container
+ip addr show
+ping 192.168.200.1
+ping 8.8.8.8</code></pre></div>
+</section>
+
+
+<section id="step-9">
+    <h2>Step 7: (Optional) Port Forwarding</h2>
+    <p>For inbound connections to a particular container/VM from the 192.168.10.x network (or outside), add a DNAT rule in the prerouting chain for IPv4 or IPv6. For instance, in <code>/etc/nftables.conf</code>:</p>
+    <div class="CodeSnippet"><pre><code>table ip nat {
+      chain prerouting {
+          type nat hook prerouting priority 0; policy accept;
+          # Forward host port 2222 on vmbr0 to container 192.168.200.101:22
+          tcp dport 2222 iif "vmbr0" dnat to 192.168.200.101:22
+      }
+      chain postrouting {
+          type nat hook postrouting priority 100; policy accept;
+          ip saddr 192.168.200.0/24 oif "vmbr0" masquerade
+      }
+  }</code></pre></div>
+  <p>Then you can SSH from your Hyper-V host at 192.168.10.10:2222 → container 192.168.200.101:22.</p>
+</section>
+
+<section id="summary">
+    <h2>Why Bother? The Bigger Picture</h2>
+    <ul>
+        <li><strong>Kubernetes:</strong> Run dual-stack clusters to test modern CNI plugins.</li>
+        <li><strong>Isolation:</strong> Your Hyper-V host only sees Proxmox’s MAC, avoiding security headaches..</li>
+        <li><strong>Future-Proofing:</strong> Experiment with IPv6 services today, even without ISP support</li>
+    </ul>
+
+</section>
+        <section id="Quick Tips">
+           <h2>Troubleshooting Quick Tips</h2>
+<ul>
+  <li><strong>No IPv6 RA</strong>: Check dnsmasq logs with <code>journalctl -u dnsmasq</code>.</li>
+  <li><strong>NAT Failure</strong>: Verify <code>nft list ruleset</code> and ensure <code>vmbr0</code> is the correct outbound interface.</li>
+  <li><strong>DHCP Timeouts</strong>: Ensure <code>vmbr1</code> is up and firewall rules aren’t blocking DHCP (port 67/68).</li>
+</ul>
+        </section>
+
+        <section id="conclusion">
+          <h2>Wrapping Up</h2>
+          <p>After days of trial, error, and way too much coffee, I’ve emerged on the other side of this dual-stack puzzle—bruised but victorious. Building this setup taught me more about IPv6, NAT quirks, and dnsmasq’s dark magic than any tutorial ever could. And guess what? It works. My budget laptop now hums with nested Proxmox, IPv4/IPv6 harmony, and a private subnet that’s begging for prototyping cloud-native solutions.</p>
+          <p>The real win? Understanding the guts of networking well enough to automate it. Soon, I’ll drop an Ansible playbook to replicate this config with a single command—because let’s face it, automation only shines when you’ve manually wrestled the beast first.</p>
+          <p>What is next? Stay tuned for Part 3, where we’ll dive into the world of K8s, microservices, IoT simulations, and the joys of experimentation. Until then, keep breaking things (responsibly). The homelab grind never sleeps. 🚀
+</p>
+            <p>Homelab Adventures continues…</p>
+        </section>
+
+        <footer class="post-info">
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+            Proxmox | Networking | IPv4 | IPv6 | NAT | DHCP | nftables | K8S | Microservices</p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2230 Words</p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2025-01-29</p>
+        </footer>
+
+        <div class="post-nav thin">
+          <a class="prev-post" href="https://thiago4go.github.io/posts/home-lab-series-part-1/" style="text-align: left;">
+            <span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></span><br>
+            <span>Homelab Adventures: Nested Proxmox on a Budget Laptop</span>
+          </a>
+          <a class="prev-post" href="https://thiago4go.github.io/posts/">
+            <span class="post-nav-label">Newer&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br>
+            <span>Posts</span>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <footer id="site-footer" class="section-inner thin animated fadeIn faster">
+      <p>&copy; 2025 <a href="https://thiago4go.github.io">thiago4go</a> &#183; <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
+      <p>Made with <a href="https://www.getzola.org" target="_blank" rel="noopener">Zola</a> &#183; Theme <a href="https://github.com/VersBinarii/hermit_zola" target="_blank" rel="noopener">Hermit_Zola</a></p>
+    </footer>
+
+    <script src="https://thiago4go.github.io/js/main.js"></script>
+  </body>
+</html>
