@@ -4,11 +4,12 @@
 
 ## Overview of Cloud Native Security
 
-* [Overview of Cloud Native Security](overview-of-cloud-native-security/overview-of-cloud-native-security.md)
+* [About This Section](overview-of-cloud-native-security/about-this-section.md)
+* [Understanding the 4Cs of Cloud Native Security: A Layered Approach](overview-of-cloud-native-security/understanding-the-4cs-of-cloud-native-security-a-layered-approach.md)
 
 ## Kubernetes Cluster Component Security
 
-* [Kubernetes Cluster Component Security](kubernetes-cluster-component-security/kubernetes-cluster-component-security.md)
+* [About This Section](kubernetes-cluster-component-security/about-this-section.md)
 
 ## Kubernetes Security Fundamentals&#x20;
 
