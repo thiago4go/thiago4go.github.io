@@ -12,6 +12,8 @@ Early security models relied on a single defensive perimeter – akin to medieva
 
 Each layer of cloud-native architecture introduces unique risks and demands tailored defenses. Below, we analyze the **Role**, **Common Risks**, **Best Practices**, and **Real-World Analysis** for each of the 4Cs—Cloud, Cluster, Container, and Code—to demonstrate how vulnerabilities cascade and how to mitigate them.
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>4Cs of Cloud Native Security</p></figcaption></figure>
+
 ### Cloud: The Foundation of Trust
 
 * **Role**: The infrastructure layer hosting your services.
