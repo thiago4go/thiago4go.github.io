@@ -1,16 +1,14 @@
 # Understanding the 4Cs of Cloud Native Security: A Layered Approach
 
-## The 4Cs of Cloud Native Security: A Layered Approach
-
 In the fast-moving world of cloud-native applications, robust security is like a well-planned Go board: each layer you place should reinforce your position and minimise vulnerabilities. With data breaches costing organisations millions of dollars, a layered, defence-in-depth approach is essential to maintain control over the board. This principle is embodied by the 4Cs of Cloud Native Security—Cloud, Cluster, Container, and Code—interconnected layers that combine to form a powerful defence.
 
 **Let’s geek out for a moment**: just as in Go, an early misstake with your joseki can leave the rest of your territory vulnerable. By carefully securing each layer, you ensure the next move is always in your favour.
 
-### **Historical Context: Defence-in-Depth Analogy**
+## **Historical Context: Defence-in-Depth Analogy**
 
 Early security models relied on a single defensive perimeter – akin to medieval fortresses with one vulnerable wall. Modern "defence in depth" mirrors layered castle defenses (moats, inner walls, drawbridges), where breaches at one layer don’t guarantee total compromise. The 4Cs framework brings this philosophy to cloud-native environments, with each layer reinforcing the next.
 
-### Modern Elements: The 4Cs of Cloud-Native Security
+## Modern Elements: The 4Cs of Cloud-Native Security
 
 Each layer of cloud-native architecture introduces unique risks and demands tailored defenses. Below, we analyze the **Role**, **Common Risks**, **Best Practices**, and **Real-World Analysis** for each of the 4Cs—Cloud, Cluster, Container, and Code—to demonstrate how vulnerabilities cascade and how to mitigate them.
 
@@ -92,7 +90,7 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 
 ***
 
-#### 2.4 Code: Securing the Application Core
+### &#x20;Code: Securing the Application Core
 
 * Role: Code is the innermost layer and the first line of defence. If your source code harbours security flaws or hardcoded secrets, attackers can use these to escalate privileges or move laterally.
 * Common Risks: Hardcoded secrets in Git repositories, SQL injection vulnerabilities, unvalidated user inputs, and insecure dependencies from third-party libraries.
@@ -114,36 +112,32 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 
 ***
 
-#### 3. Interlocking Layers: The Power of a Cohesive Strategy
+#### &#x20;Interlocking Layers: The Power of a Cohesive Strategy
 
-Securing only one layer is insufficient. Even the most secure code can be compromised if the underlying cluster or cloud settings are misconfigured. Conversely, a secure cloud foundation can’t compensate for vulnerable container images or poorly written code.Case StudyIn 2024, Intuit implemented a holistic security program illustrating how a defence-in-depth approach pays off:
-
-* Code: SAST scans detected risky libraries.
-* Container: Rebuilt images with patched dependencies.
-* Cluster: Strict network policies minimised lateral movement.
-* Cloud: Cloud-level monitoring tools (e.g., AWS GuardDuty) alerted them to anomalies.
-
-By layering their defences, Intuit effectively contained potential breaches, demonstrating the synergy among the 4Cs.
+Securing only one layer is insufficient. Even the most secure code can be compromised if the underlying cluster or cloud settings are misconfigured. Conversely, a secure cloud foundation can’t compensate for vulnerable container images or poorly written code. Ddemonstrating the synergy among the 4Cs.
 
 ***
 
 #### Level Up Your Security: 6 Actionable Recommendations
 
 1. Automate Infrastructure-as-Code (IaC) Scans
-   * Tools like Checkov or Terrascan can audit your Terraform files or Kubernetes manifests for misconfigurations.
+   * Tools like [Checkov](https://www.checkov.io/) or [Terrascan ](https://www.tenable.com/terrascan)can audit your Terraform files or Kubernetes manifests for misconfigurations.&#x20;
 2. Enforce Zero-Trust Networking
-   * Define Kubernetes Network Policies to strictly limit communication channels between pods, preventing attackers from moving freely.
+   * Define [Kubernetes Network Policies ](https://kubernetes.io/docs/concepts/services-networking/network-policies/)to strictly limit communication channels between pods, preventing attackers from moving freely.
 3. Adopt Shift-Left Security
-   * Integrate scanning tools (e.g., Snyk, GitGuardian) directly into the developers’ IDEs and CI/CD pipelines to catch vulnerabilities early.
+   * Integrate scanning tools (e.g., [Snyk](https://snyk.io/), [GitGuardian](https://www.gitguardian.com/)) directly into the developers’ IDEs and CI/CD pipelines to catch vulnerabilities early.
 4. Regularly Rotate Credentials
-   * Use Kubernetes Secrets integrated with solutions like HashiCorp Vault for dynamic secret management and rotation.
+   * Use [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) integrated with solutions like [HashiCorp Vault](https://www.vaultproject.io/) for dynamic secret management and rotation. (_Kubernetes Secrets are, by default, stored unencrypted_)
 5. Holistic Monitoring
-   * Deploy runtime security tools (e.g., Falco) for real-time threat detection at the container and cluster levels.
+   * Deploy runtime security tools (e.g., [Falco](https://falco.org/)) for real-time threat detection at the container and cluster levels.
 6. Stay Current with Benchmarks & Frameworks
-   * Reference security guidelines like the CIS Kubernetes Benchmark and keep track of emerging threats to update your defences accordingly.
+   * Reference security guidelines like the[ CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes) and keep track of emerging threats to update your defences accordingly.
 
 ***
 
 ### Conclusion
 
-Layered security is no longer optional—it is a necessity. Much like a Go board, where every stone’s placement influences the entire game, the 4Cs of Cloud Native Security require strategic foresight. Each layer (Cloud, Cluster, Container, Code) must be secured not in isolation, but as part of an interconnected defense where weaknesses in one area are compensated by strengths in others.Final ThoughtAs cloud-native architectures continue to evolve, so too must our security approaches. How will you level up your strategy? Whether through CNCF sandbox projects or community-driven benchmarks, the key lies in adaptability—balancing global insights with technical rigor. As I refine these layered strategies in real-world ecosystems, one truth remains: security thrives where collaboration and precision intersect.
+Layered security is no longer optional—it is a necessity. Much like a Go board, where every stone’s placement influences the entire game, the 4Cs of Cloud Native Security require strategic foresight. Each layer (Cloud, Cluster, Container, Code) must be secured not in isolation, but as part of an interconnected defense where weaknesses in one area are compensated by strengths in others.
+
+
+
