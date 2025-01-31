@@ -1,3 +1,9 @@
+---
+description: >-
+  Secures supply chains (SBOMs, SLSA), service meshes, PKI, and Helm charts.
+  Focuses on observability, zero-trust networking, and policy-as-code.
+---
+
 # Platform Security
 
 This section addresses security at the platform level, ensuring the infrastructure and tools supporting Kubernetes—from software supply chains to service meshes—are resilient, compliant, and trustworthy.

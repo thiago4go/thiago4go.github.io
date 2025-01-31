@@ -1,3 +1,9 @@
+---
+description: >-
+  Core practices like RBAC, secrets management, network policies, and admission
+  control. Enforces least privilege, encrypts data, and detects runtime threats.
+---
+
 # Kubernetes Security Fundamentals
 
 This section tackles essential security practices for Kubernetes, from authentication to runtime protection. Learn how to enforce policies, manage secrets, and monitor threats to build a robust security foundation for your clusters.

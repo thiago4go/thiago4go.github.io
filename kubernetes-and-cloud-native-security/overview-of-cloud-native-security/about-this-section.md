@@ -1,3 +1,10 @@
+---
+description: >-
+  Securing cloud-native systems using layered defense (4Cs model), hardening
+  infrastructure, and defining roles between teams. Covers frameworks,
+  isolation, and artifact integrity.
+---
+
 # Cloud Native Security
 
 Welcome to the **Cloud Native Security** section of our blog. This series offers clear, actionable guidance to secure cloud-native systems, with a focus on Kubernetes and modern infrastructure. These posts aim to simplify complex security concepts into practical steps.

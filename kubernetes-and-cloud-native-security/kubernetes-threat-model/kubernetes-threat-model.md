@@ -1,3 +1,9 @@
+---
+description: >-
+  Identifies attack surfaces (persistence, DoS, privilege escalation) and
+  mitigates risks using STRIDE, MITRE ATT&CK, and runtime monitoring tools.
+---
+
 # Kubernetes Threat Model
 
 This section focuses on identifying, analyzing, and mitigating risks unique to Kubernetes environments. Learn how attackers exploit clusters and apply proactive strategies to defend against persistence, privilege escalation, data breaches, and more.

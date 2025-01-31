@@ -1,3 +1,9 @@
+---
+description: >-
+  Aligns Kubernetes with CIS, NIST, and MITRE ATT&CK. Automates audits, policy
+  enforcement, and supply chain compliance using Kyverno and Checkov.
+---
+
 # Compliance and Security Frameworks
 
 **About This Section: Compliance and Security Frameworks**
