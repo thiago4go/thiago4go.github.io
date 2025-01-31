@@ -1,8 +1,4 @@
----
-description: Kubernetes Cluster Component Security
----
-
-# About This Section
+# Kubernetes Cluster Component Security
 
 This section focuses on securing the core building blocks of Kubernetes clusters. Each post dives into hardening critical components—from the API server to storage—ensuring your cluster remains resilient against attacks.
 

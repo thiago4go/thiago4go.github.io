@@ -1,8 +1,4 @@
----
-description: Kubernetes Threat Model
----
-
-# About This Section
+# Kubernetes Threat Model
 
 This section focuses on identifying, analyzing, and mitigating risks unique to Kubernetes environments. Learn how attackers exploit clusters and apply proactive strategies to defend against persistence, privilege escalation, data breaches, and more.
 

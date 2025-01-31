@@ -1,8 +1,4 @@
----
-description: Kubernetes Security Fundamentals
----
-
-# About This Section
+# Kubernetes Security Fundamentals
 
 This section tackles essential security practices for Kubernetes, from authentication to runtime protection. Learn how to enforce policies, manage secrets, and monitor threats to build a robust security foundation for your clusters.
 

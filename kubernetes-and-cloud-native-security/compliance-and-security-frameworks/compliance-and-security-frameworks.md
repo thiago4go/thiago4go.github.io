@@ -1,8 +1,4 @@
----
-description: Compliance and Security Frameworks
----
-
-# About This Section
+# Compliance and Security Frameworks
 
 **About This Section: Compliance and Security Frameworks**
 

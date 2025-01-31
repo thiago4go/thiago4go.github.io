@@ -1,8 +1,4 @@
----
-description: Platform Security
----
-
-# About This Section
+# Platform Security
 
 This section addresses security at the platform level, ensuring the infrastructure and tools supporting Kubernetes—from software supply chains to service meshes—are resilient, compliant, and trustworthy.
 
