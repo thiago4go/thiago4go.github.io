@@ -112,13 +112,7 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 
 ***
 
-#### &#x20;Interlocking Layers: The Power of a Cohesive Strategy
-
-Securing only one layer is insufficient. Even the most secure code can be compromised if the underlying cluster or cloud settings are misconfigured. Conversely, a secure cloud foundation can’t compensate for vulnerable container images or poorly written code. Ddemonstrating the synergy among the 4Cs.
-
-***
-
-#### Level Up Your Security: 6 Actionable Recommendations
+## 6 Actionable Recommendations
 
 1. Automate Infrastructure-as-Code (IaC) Scans
    * Tools like [Checkov](https://www.checkov.io/) or [Terrascan ](https://www.tenable.com/terrascan)can audit your Terraform files or Kubernetes manifests for misconfigurations.&#x20;
@@ -133,9 +127,15 @@ Securing only one layer is insufficient. Even the most secure code can be compro
 6. Stay Current with Benchmarks & Frameworks
    * Reference security guidelines like the[ CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes) and keep track of emerging threats to update your defences accordingly.
 
+Beyond sharing knowledge here, I work directly with teams and organizations as **Nikkei One (n1)**—my solo consultancy focused on turning cloud-native ambitions into reality. Think of me as your one-stop shop. With expertise in Kubernetes, cloud security, and strategic tech leadership. Let’s collaborate to achieve your goals.
+
+📬 **Reach out at** [**contact@nikkei.one**](mailto:contact@nikkei.one) to discuss consulting, hands-on training, or joint projects.
+
 ***
 
-### Conclusion
+## Conclusion
+
+Securing only one layer is insufficient. Even the most secure code can be compromised if the underlying cluster or cloud settings are misconfigured. Conversely, a secure cloud foundation can’t compensate for vulnerable container images or poorly written code.&#x20;
 
 Layered security is no longer optional—it is a necessity. Much like a Go board, where every stone’s placement influences the entire game, the 4Cs of Cloud Native Security require strategic foresight. Each layer (Cloud, Cluster, Container, Code) must be secured not in isolation, but as part of an interconnected defense where weaknesses in one area are compensated by strengths in others.
 
