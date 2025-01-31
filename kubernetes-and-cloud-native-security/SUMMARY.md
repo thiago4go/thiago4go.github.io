@@ -13,7 +13,7 @@
 
 ## Kubernetes Security Fundamentals&#x20;
 
-* [Kubernetes Security Fundamentals](kubernetes-security-fundamentals/kubernetes-security-fundamentals.md)
+* [About This Section](kubernetes-security-fundamentals/about-this-section.md)
 
 ## Kubernetes Threat Model
 
