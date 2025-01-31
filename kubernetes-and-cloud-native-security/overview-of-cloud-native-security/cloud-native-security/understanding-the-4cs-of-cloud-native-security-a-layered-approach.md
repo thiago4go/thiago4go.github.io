@@ -101,7 +101,7 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
   * Use Software Bill of Materials (SBOM) to track all third-party dependencies and ensure timely updates.
   * Adopt DevSecOps practices—shift security checks left so issues are caught during development rather than post-deployment.
 * Real-World Analysis:
-  * Solana JavaScript SDK Supply Chain Attack
+  * [Solana JavaScript SDK Supply Chain Attack](https://www.cm-alliance.com/cybersecurity-blog/december-2024-major-cyber-attacks-data-breaches-ransomware-attacks)
     * **Incident:** The legitimate Solana Web3.js library was backdoored in a supply chain attack. Malicious code was injected to steal private cryptocurrency keys, enabling attackers to drain wallets.
     * **Key Challenges:**
       * Identifying and removing the backdoored library from the ecosystem.
