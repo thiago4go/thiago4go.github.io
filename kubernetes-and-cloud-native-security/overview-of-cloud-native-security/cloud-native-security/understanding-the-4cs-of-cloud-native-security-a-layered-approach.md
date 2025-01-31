@@ -14,13 +14,13 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 
 ### Cloud: The Foundation of Trust
 
-* Role: The infrastructure layer hosting your services.
-* Common Risks: Misconfigurations (e.g., publicly exposed storage buckets), weak Identity and Access Management (IAM) policies, and unpatched infrastructure services.
-* Best Practices:
+* **Role**: The infrastructure layer hosting your services.
+* **Common Risks:** Misconfigurations (e.g., publicly exposed storage buckets), weak Identity and Access Management (IAM) policies, and unpatched infrastructure services.
+* **Best Practices:**
   * Apply the shared responsibility model diligently—cloud providers secure the infrastructure, but it is up to users to configure it securely.
   * Use Cloud Security Posture Management (CSPM) tools to automate compliance checks.&#x20;
   * Implement strong IAM policies to restrict and monitor access.
-* Real-World Analysis:
+* **Real-World Analysis:**
   * [**Pegasus Airlines AWS Bucket Misconfiguration**](https://www.cshub.com/attacks/news/iotw-turkish-based-airline-leaves-65-tb-of-sensitive-data-exposed)
     * **Incident**: A misconfigured AWS bucket exposed 6.5 terabytes of sensitive data, including flight charts, crew information, and navigation materials. This error led to significant data exposure.
     * **Key Challenges**:
@@ -43,12 +43,12 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 ### Cluster: **Securing the Orchestrator**
 
 * **Role**: Kubernetes clusters manage containerised workloads but are prime targets due to potential misconfigurations in role-based access control (RBAC) or exposed APIs.
-* C**ommon Risks**: Unrestricted pod-to-pod communication, inadequate encryption of data in transit, and elevated permissions for cluster components.
+* **Common Risks**: Unrestricted pod-to-pod communication, inadequate encryption of data in transit, and elevated permissions for cluster components.
 * **Best Practices**:
   * Enforce RBAC and network segmentation (e.g., Kubernetes Network Policies).
   * Leverage policy-as-code tools like Kyverno or Open Policy Agent (OPA) to validate and enforce configurations, blocking non-compliant deployments
   * Regularly patch and update Kubernetes components, especially the API server.
-* Real-World Analysis:
+* **Real-World Analysis:**
   * [**Spotify Accidentally Deleted its Clusters**](https://www.youtube.com/watch?v=ix0Tw8uinWs)
     * **Incident: O**ne of the infrastructure engineers accidentally deleted one of the Kube clusters in Containers from their Cloud-Native Infrastructure, and again the other team deleted one more cluster in the USA
     * **Key Challenges:**
@@ -71,13 +71,13 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 
 ### Container: **Minimizing Attack Surfaces**
 
-* Role: Containers bundle your application code and dependencies but can contain hidden vulnerabilities if not regularly scanned, correctly configured and updated.
-* Common Risks: Outdated libraries (e.g., the Log4j vulnerability), overly privileged container permissions, and unverified base images.
-* Best Practices:
+* **Role**: Containers bundle your application code and dependencies but can contain hidden vulnerabilities if not regularly scanned, correctly configured and updated.
+* **Common Risks**: Outdated libraries (e.g., the Log4j vulnerability), overly privileged container permissions, and unverified base images.
+* **Best Practices:**
   * Use container-scanning tools (e.g., Trivy, Snyk, or Clair) to detect vulnerabilities in images.
   * Employ minimal privileges—run containers with the least necessary permissions.
   * Automate signature validation in CI/CD pipelines to ensure only trusted images are used in production.
-* Real-World Analysis:
+* **Real-World Analysis:**
   * [Log4Shell Vulnerability (Log4j)](https://www.criticalstart.com/log4j-the-aftermath-and-lessons-learned/)
     * **Incident:** The Log4Shell vulnerability (CVE-2021-44228) in the Log4j Java library allowed attackers to execute arbitrary code remotely, putting 72% of organizations globally at risk. This vulnerability impacted industries such as financial services, healthcare, software, and manufacturing.
     * **Key Challenges:**
@@ -92,13 +92,13 @@ Each layer of cloud-native architecture introduces unique risks and demands tail
 
 ### &#x20;Code: Securing the Application Core
 
-* Role: Code is the innermost layer and the first line of defence. If your source code harbours security flaws or hardcoded secrets, attackers can use these to escalate privileges or move laterally.
-* Common Risks: Hardcoded secrets in Git repositories, SQL injection vulnerabilities, unvalidated user inputs, and insecure dependencies from third-party libraries.
-* Best Practices:
+* **Role**: Code is the innermost layer and the first line of defence. If your source code harbours security flaws or hardcoded secrets, attackers can use these to escalate privileges or move laterally.
+* **Common Risks**: Hardcoded secrets in Git repositories, SQL injection vulnerabilities, unvalidated user inputs, and insecure dependencies from third-party libraries.
+* **Best Practices:**
   * Integrate Static Application Security Testing (SAST) and Dynamic Application Security Testing (DAST) into CI/CD pipelines (e.g., SonarQube, OWASP ZAP).
   * Use Software Bill of Materials (SBOM) to track all third-party dependencies and ensure timely updates.
   * Adopt DevSecOps practices—shift security checks left so issues are caught during development rather than post-deployment.
-* Real-World Analysis:
+* **Real-World** **Analysis**:
   * [Solana JavaScript SDK Supply Chain Attack](https://www.cm-alliance.com/cybersecurity-blog/december-2024-major-cyber-attacks-data-breaches-ransomware-attacks)
     * **Incident:** The legitimate Solana Web3.js library was backdoored in a supply chain attack. Malicious code was injected to steal private cryptocurrency keys, enabling attackers to drain wallets.
     * **Key Challenges:**
