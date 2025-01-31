@@ -11,11 +11,11 @@ I’m Thiago—a **Cloud Native BizDevOps Architect**, CNCF Kubestronaut, and yo
 
 #### **Why This Blog?**
 
-Over the past year, I’ve poured my passion into building the [**Kubernetes Security KCSA Mock Exam App**](https://kubernetes-security-kcsa-mock.vercel.app/), helping thousands of professionals prepare for certification while embedding security-first mindsets. Now, I’m channeling that same energy into this blog to: . This blog isn’t just about theory or opinions—it’s about **grounded, actionable strategies** backed by:
+Over the past year, I’ve channeled my passion into developing the [**`Kubernetes Security KCSA Mock Exam App`**](https://github.com/thiago4go/kubernetes-security-kcsa-mock), empowering thousands of professionals to prepare for certification while cultivating a security-first mindset. Now, I’m bringing that same dedication to this blog, with a focus on delivering **actionable insights** that bridge theory and practice. This isn’t just another opinion hub—it’s a resource built on:
 
-* **Real-World Scenarios**: Every post is grounded in production incidents and modern best practices.
-* **Industry Standards**: Aligned with CIS Benchmarks, NIST guidelines, and MITRE ATT\&CK frameworks.
-* **KCSA Exam Synergy**: Content mirrors the exam’s domains, making it a perfect study companion.
+* **Real-World Scenarios**: Every post is addressing production incidents and aligning with modern security best practices.
+* **Industry Standards**: Aligned with CNCF whitepapers, CIS Benchmarks, NIST guidelines, and MITRE ATT\&CK frameworks.
+* **KCSA Exam Synergy**: Content directly maps to the exam’s core domains, doubling as both a practical guide and a study companion.
 
 ***
 
