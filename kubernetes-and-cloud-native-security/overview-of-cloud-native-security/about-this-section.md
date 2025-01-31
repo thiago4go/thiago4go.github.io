@@ -30,4 +30,4 @@ Explore the posts below to strengthen your security posture in cloud-native envi
 
 ***
 
-_Ready to begin? Start with_ [_Understanding the 4Cs of Cloud Native Security_](https://chat.deepseek.com/a/chat/s/link) _or browse all posts._
+_Ready to begin? Start with_ [_Understanding the 4Cs of Cloud Native Security_](understanding-the-4cs-of-cloud-native-security-a-layered-approach.md) _or browse all posts._

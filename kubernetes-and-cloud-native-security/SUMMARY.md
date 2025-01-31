@@ -17,12 +17,12 @@
 
 ## Kubernetes Threat Model
 
-* [Kubernetes Threat Model](kubernetes-threat-model/kubernetes-threat-model.md)
+* [About This Section](kubernetes-threat-model/about-this-section.md)
 
 ## Platform Security&#x20;
 
-* [Platform Security](platform-security/platform-security.md)
+* [About This Section](platform-security/about-this-section.md)
 
 ## Compliance and Security Frameworks
 
-* [Compliance and Security Frameworks](compliance-and-security-frameworks/compliance-and-security-frameworks.md)
+* [About This Section](compliance-and-security-frameworks/about-this-section.md)

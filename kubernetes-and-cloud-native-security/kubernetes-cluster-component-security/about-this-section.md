@@ -28,4 +28,4 @@ Explore the posts below to build a defense-in-depth strategy for your Kubernetes
 
 ***
 
-_Ready to dive deeper? Begin with_ [_API Server Security: TLS, RBAC, and Audit Logging_](https://chat.deepseek.com/a/chat/s/link) _or browse all posts above._
+_Ready to dive deeper? Begin with API Server Security: TLS, RBAC, and Audit Logging or browse all posts._

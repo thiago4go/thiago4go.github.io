@@ -26,8 +26,6 @@ Kubernetes defaults often prioritize flexibility over security. Unrestricted pod
 
 Begin with foundational topics like Pod Security Standards or RBAC, then progress to advanced tools like Vault or Falco. Posts like _Migrating from PodSecurityPolicies to Pod Security Admission_ or _Dynamic Admission Control_ include migration guides and code snippets for seamless implementation.
 
-Explore the posts below to secure your cluster’s core workflows.
-
 ***
 
 _Start with Pod Security Standards (PSS): Baseline vs. Restricted Policies or browse all posts._
