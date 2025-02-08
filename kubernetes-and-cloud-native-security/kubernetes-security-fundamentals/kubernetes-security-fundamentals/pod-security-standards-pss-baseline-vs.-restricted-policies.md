@@ -74,7 +74,7 @@ Restricted is your security powerhouse. Think data vaults, high-security zones â
 
 ### Beyond Built-in: Exploring Alternative Enforcement Options
 
-While Pod Security Admission (PSA) provides a fantastic built-in mechanism for enforcing these security standards, it's worth noting that the Kubernetes ecosystem offers other powerful alternatives for managing security profiles. Tools like Kubewarden, Kyverno, and OPA Gatekeeper provide different approaches and expanded capabilities for policy enforcement within your clusters.
+While Pod Security Admission (PSA) provides a fantastic built-in mechanism for enforcing these security standards, it's worth noting that the Kubernetes ecosystem offers other powerful alternatives for managing security profiles. Tools like  [Kyverno](https://kyverno.io/) and [OPA Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/) provide different approaches and expanded capabilities for policy enforcement within your clusters.
 
 The decision to leverage the built-in Pod Security Admission controller versus opting for a third-party tool is a strategic one, deeply intertwined with your specific environment and security philosophy. When evaluating any security solution, a critical factor is the trust you place in your supply chain. Ultimately, the most important takeaway is this: whether you choose the simplicity of the built-in PSA or the extended flexibility of tools like [Kyverno](https://kyverno.io/) or [OPA Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/), adopting any robust enforcement approach is significantly better than neglecting pod security altogether.
 
@@ -166,7 +166,7 @@ metadata:
     name: secure-app
     labels:
         pod-security.kubernetes.io/enforce: restricted
-        pod-security.kubernetes.io/enforce-version: restricted
+        pod-security.kubernetes.io/enforce-version: latest
 ```
 
 {% hint style="success" %}
