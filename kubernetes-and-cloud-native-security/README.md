@@ -5,7 +5,7 @@ description: By Thiago S Shimada Ramos
 # Welcome to the Kubernetes Security playbook
 
 Hey there, cloud-native enthusiasts! 👋\
-I’m Thiago—a CNCF Kubestronaut, and your guide through the ever-evolving world of Kubernetes security. If  you’re just starting your cloud journey or securing mission-critical clusters and want to keep your security skills razor-sharp, you’re in the right place.
+I’m Thiago— a [CNCF Kubestronaut](https://www.cncf.io/training/kubestronaut/?p=thiago-sinji-shimada-ramos), and your guide through the ever-evolving world of Kubernetes security. If  you’re just starting your cloud journey or securing mission-critical clusters and want to keep your security skills razor-sharp, you’re in the right place.
 
 Over the past year, I’ve channeled my passion into developing the [**`Kubernetes Security KCSA Mock Exam App`**](https://github.com/thiago4go/kubernetes-security-kcsa-mock), empowering thousands of professionals to prepare for certification while cultivating a security-first mindset. Now, I’m bringing that same dedication to this blog, with a focus on delivering **actionable insights** that bridge theory and practice. This isn’t just another opinion hub—it’s a resource built on:
 
