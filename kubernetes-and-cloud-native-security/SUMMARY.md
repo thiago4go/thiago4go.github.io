@@ -13,7 +13,8 @@
 
 ## Kubernetes Security Fundamentals&#x20;
 
-* [Kubernetes Security Fundamentals](kubernetes-security-fundamentals/kubernetes-security-fundamentals.md)
+* [Kubernetes Security Fundamentals](kubernetes-security-fundamentals/kubernetes-security-fundamentals/README.md)
+  * [Pod Security Standards (PSS): Baseline vs. Restricted Policies](kubernetes-security-fundamentals/kubernetes-security-fundamentals/pod-security-standards-pss-baseline-vs.-restricted-policies.md)
 
 ## Kubernetes Threat Model
 
