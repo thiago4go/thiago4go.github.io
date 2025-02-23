@@ -22,7 +22,8 @@
 
 ## Platform Security&#x20;
 
-* [Platform Security](platform-security/platform-security.md)
+* [Platform Security](platform-security/platform-security/README.md)
+  * [Supply Chain Security: SBOMs, SLSA, and Sigstore](platform-security/platform-security/supply-chain-security-sboms-slsa-and-sigstore.md)
 
 ## Compliance and Security Frameworks
 

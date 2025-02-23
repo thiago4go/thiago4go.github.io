@@ -7,21 +7,21 @@ description: By Thiago S Shimada Ramos
 Hey there, cloud-native enthusiasts! 👋\
 I’m Thiago— a [CNCF Kubestronaut](https://www.cncf.io/training/kubestronaut/?p=thiago-sinji-shimada-ramos), and your guide through the ever-evolving world of Kubernetes security. If you’re just starting your cloud journey or securing mission-critical clusters and want to keep your security skills razor-sharp, you’re in the right place.
 
-Over the past year, I poured my energy into creating the [**Kubernetes Security KCSA Mock Exam App**](https://github.com/thiago4go/kubernetes-security-kcsa-mock/). It's already helped thousands of professionals like you build confidence and adopt a security-first approach. We've built a thriving community around the app. Your feedback and contributions have been invaluable in keeping the app accurate and comprehensive – thank you!
+Over the past year, I’ve channeled my passion into developing the [**Kubernetes Security KCSA Mock Exam App**](https://github.com/thiago4go/kubernetes-security-kcsa-mock/). It's already helped thousands of professionals like you build confidence and adopt a security-first approach. We've built a thriving community around the app. Your feedback and contributions have been invaluable in keeping the app accurate and comprehensive – thank you!
 
 ### Why the KCSA Mock Exam App?
 
-Preparing for certification exams, particularly those in specialized fields like Kubernetes security, can present significant challenges. It became apparent to me during my own [KCSA ](https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/)exam preparation that there was a gap in available resources. While robust exam simulators exist for certifications like [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/), [CKAD](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/), and [CKS](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/), a comparable tool specifically for the KCSA exam was lacking.
+Preparing for certification exams, particularly those in specialized fields like Kubernetes security, can present significant challenges. It became apparent to me during my own [KCSA ](https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/)exam preparation that there was a gap in available resources.
 
 This realization arose from discussions with a study partner, [Mark Wilson](https://www.linkedin.com/in/m2w/overlay/about-this-profile/), just two days prior to my KCSA examination. We identified the absence of a dedicated practice resource akin to the simulators available for other Kubernetes certifications. Recognizing this need, and leveraging available tools, I developed the Kubernetes Security KCSA Mock Exam App.
 
-The primary objective is to provide a practical and effective study method that directly addresses the challenges of KCSA exam preparation. It is designed to build user confidence through realistic practice and targeted learning.
+The primary objective is to provide a practical and effective study method that directly addresses the challenges of exam preparation. It is designed to build user confidence through realistic practice and targeted learning.
 
 The app offers the following key features to support your KCSA exam preparation:
 
 ### **📌 Key Features:**
 
-✔️ **300+ exam-style questions, carefully crafted to mirror the KCSA exam.**\
+✔️ **300+ exam-style questions:** carefully crafted to mirror the KCSA exam.\
 ✔️ **Randomized question order** in every exam session\
 ✔️ **Personalized Practice:** Configure the number of questions per exam to fit your study schedule.\
 ✔️ **Interactive exam interface** (one question per page)\
