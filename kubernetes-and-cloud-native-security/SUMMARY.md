@@ -19,7 +19,7 @@
 ## Kubernetes Threat Model
 
 * [Kubernetes Threat Model](kubernetes-threat-model/kubernetes-threat-model/README.md)
-  * [Kubernetes Trust Boundaries: Mapping Data Flows and Attack Surfacesf](kubernetes-threat-model/kubernetes-threat-model/kubernetes-trust-boundaries-mapping-data-flows-and-attack-surfacesf.md)
+  * [Kubernetes Trust Boundaries: Mapping Data Flows and Attack Surfaces](kubernetes-threat-model/kubernetes-threat-model/kubernetes-trust-boundaries-mapping-data-flows-and-attack-surfaces.md)
 
 ## Platform Security&#x20;
 

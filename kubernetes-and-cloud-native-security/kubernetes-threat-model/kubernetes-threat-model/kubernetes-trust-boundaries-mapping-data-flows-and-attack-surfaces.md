@@ -1,4 +1,4 @@
-# Kubernetes Trust Boundaries: Fortifying Your Cloud-Native Fortressage
+# Kubernetes Trust Boundaries: Mapping Data Flows and Attack Surfaces
 
 Securing Kubernetes is akin to managing a complex, interconnected environment where every component must be safeguarded against potential threats. Just as an organization must clearly define and secure its critical points of interaction, a Kubernetes environment requires precise delineation and protection of its trust boundaries to mitigate vulnerabilities and prevent breaches.
 
