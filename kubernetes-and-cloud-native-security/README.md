@@ -1,8 +1,21 @@
 ---
 description: By Thiago S Shimada Ramos
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: false
+  outline:
+    visible: false
+  pagination:
+    visible: true
 ---
 
 # Welcome to the Kubernetes Security playbook
+
+<figure><img src=".gitbook/assets/cloud-native security.png" alt=""><figcaption></figcaption></figure>
 
 Hey there, cloud-native enthusiasts! 👋\
 I’m Thiago— a [CNCF Kubestronaut](https://www.cncf.io/training/kubestronaut/?p=thiago-sinji-shimada-ramos), and your guide through the ever-evolving world of Kubernetes security. If you’re just starting your cloud journey or securing mission-critical clusters and want to keep your security skills razor-sharp, you’re in the right place.
@@ -13,7 +26,7 @@ Over the past year, I’ve channeled my passion into developing the [**Kubernete
 
 Preparing for certification exams, particularly those in specialized fields like Kubernetes security, can present significant challenges. It became apparent to me during my own [KCSA ](https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/)exam preparation that there was a gap in available resources.
 
-This realization arose from discussions with a study partner, [Mark Wilson](https://www.linkedin.com/in/m2w/overlay/about-this-profile/), just two days prior to my KCSA examination. We identified the absence of a dedicated practice resource akin to the simulators available for other Kubernetes certifications. Recognizing this need, and leveraging available tools, I developed the Kubernetes Security KCSA Mock Exam App.
+This realization arose from discussions with a study partner, [Mark Wilson](https://www.linkedin.com/in/m2w/), just two days prior to my KCSA examination. We identified the absence of a dedicated practice resource akin to the simulators available for other Kubernetes certifications. Recognizing this need, and leveraging available tools, I developed the Kubernetes Security KCSA Mock Exam App.
 
 The primary objective is to provide a practical and effective study method that directly addresses the challenges of exam preparation. It is designed to build user confidence through realistic practice and targeted learning.
 

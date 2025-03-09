@@ -18,7 +18,8 @@
 
 ## Kubernetes Threat Model
 
-* [Kubernetes Threat Model](kubernetes-threat-model/kubernetes-threat-model.md)
+* [Kubernetes Threat Model](kubernetes-threat-model/kubernetes-threat-model/README.md)
+  * [Kubernetes Trust Boundaries: Fortifying Your Cloud-Native Fortressage](kubernetes-threat-model/kubernetes-threat-model/kubernetes-trust-boundaries-fortifying-your-cloud-native-fortressage.md)
 
 ## Platform Security&#x20;
 
