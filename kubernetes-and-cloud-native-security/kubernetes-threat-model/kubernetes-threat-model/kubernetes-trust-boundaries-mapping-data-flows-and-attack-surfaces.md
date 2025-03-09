@@ -8,8 +8,6 @@ This article provides a comprehensive guide to understanding and strengthening K
 
 ## Background & Key Concepts: Understanding the Landscape
 
-_Before diving into specifics, let's define some core concepts:_
-
 ### **- Trust Boundaries:**&#x20;
 
 These are the critical lines between different security zones within your Kubernetes cluster. They represent points where the level of trust or control changes between components, networks, or roles. Data flowing across a trust boundary must be scrutinized – authenticated, authorized, and validated – as this is where attackers often probe for weaknesses .
@@ -22,7 +20,7 @@ The movement of information within and outside the Kubernetes cluster. Understan
 
 The sum of all potential points where an unauthorized user could attempt to enter or extract data from the environment.
 
-_Several key security principles are fundamental to securing Kubernetes trust boundaries:_
+#### **Key security principles are fundamental to securing Kubernetes trust boundaries:**
 
 * **Least Privilege:** Every user, service account, and component should have only the minimum necessary permissions . This limits the "blast radius" of any compromise. For example, a CI/CD pipeline should only have access to deploy to its specific namespace, not the entire cluster .
 * **Defense in Depth:** Layer multiple security measures like an onion. An attacker should have to peel through several layers (network policy, authentication, pod security rules) before reaching sensitive assets . If one layer fails, the next provides backup.
@@ -47,7 +45,7 @@ Understanding data flow within a Kubernetes cluster is the first step to identif
 6. **Internal Service Networking**: If the Pod needs to communicate with other services, traffic might flow through kube-proxy or a service mesh sidecar. Network policies should control pod-to-pod and pod-to-external communication, enforcing a zero-trust network within the cluster.
 7. **API Server → All (Watch/Sync)**: The API Server acts as the central hub, with other components constantly watching and syncing their state. All these interactions must be authenticated.
 
-### Key Trust Boundaries to Secure
+### Trust Boundaries to Secure
 
 From the data flow above, we can identify several key trust boundaries:
 
