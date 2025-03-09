@@ -29,8 +29,6 @@ Kubernetes clusters are high-value targets for attackers due to their complexity
 
 Start by mapping your cluster’s trust boundaries to understand its attack surface, then address specific threats like malicious workloads or network exploits. Posts like _Threat Modeling Kubernetes: STRIDE Methodology in Action_ provide frameworks to prioritize risks, while guides on runtime detection or mTLS offer ready-to-deploy configurations.
 
-Explore the posts below to build a threat-aware defense strategy for your cluster.
-
 ***
 
 _Begin with_[ _Kubernetes Trust Boundaries: Mapping Data Flows and Attack Surfaces_](kubernetes-trust-boundaries-mapping-data-flows-and-attack-surfaces.md) _or browse all posts._
