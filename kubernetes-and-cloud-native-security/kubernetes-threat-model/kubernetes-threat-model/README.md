@@ -33,4 +33,4 @@ Explore the posts below to build a threat-aware defense strategy for your cluste
 
 ***
 
-_Begin with Kubernetes Trust Boundaries: Mapping Data Flows and Attack Surfaces or browse all posts._
+_Begin with_[ _Kubernetes Trust Boundaries: Mapping Data Flows and Attack Surfaces_](kubernetes-trust-boundaries-mapping-data-flows-and-attack-surfaces.md) _or browse all posts._

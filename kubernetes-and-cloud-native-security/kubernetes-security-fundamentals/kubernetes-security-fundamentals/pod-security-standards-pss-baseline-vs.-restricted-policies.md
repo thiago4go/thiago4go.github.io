@@ -8,7 +8,7 @@ Before we jump into PSS, let's quickly ground ourselves in the fundamentals. Clo
 
 ## Meet the Security Trio
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>PSS and PSA</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>PSS and PSA</p></figcaption></figure>
 
 PSS provides three distinct security profiles, each offering a progressively higher level of security. These profiles are designed to manage pod permissions.
 

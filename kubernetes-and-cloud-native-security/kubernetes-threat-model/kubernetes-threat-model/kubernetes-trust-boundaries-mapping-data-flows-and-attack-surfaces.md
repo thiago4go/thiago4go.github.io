@@ -35,7 +35,7 @@ _Several key security principles are fundamental to securing Kubernetes trust bo
 
 Understanding data flow within a Kubernetes cluster is the first step to identifying trust boundaries and potential attack surfaces. Let's break down a typical operation: deploying an application using `kubectl apply`.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Data flow and Trust Boundaries - <code>kubectl apply</code></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Data flow and Trust Boundaries - <code>kubectl apply</code></p></figcaption></figure>
 
 ### Kubernetes Data Flow: A Step-by-Step Breakdown
 
@@ -57,7 +57,7 @@ From the data flow above, we can identify several key trust boundaries:
 * <mark style="color:red;">**TB4 Within the Node – Pod to Host:**</mark> This is the container isolation boundary. Linux security features (seccomp, AppArmor/SELinux, rootless containers) strengthen this boundary.
 * <mark style="color:red;">**TB5 Pod-to-Pod / Pod-to-External:**</mark> Network boundaries between pods, and between pods and external systems, need strict control. NetworkPolicies or service meshes enforce zero-trust networking.
 
-#### Kubernetes Attack Surfaces and Real-World Incidents
+## Kubernetes Attack Surfaces and Real-World Incidents
 
 Now, let's examine common attack surfaces and real-world incidents that highlight the risks:
 
@@ -70,21 +70,19 @@ Real-world incidents, beyond those already mentioned, include:
 * [Software Supply Chain Attacks](https://www.sonatype.com/state-of-the-software-supply-chain/introduction): The Sonatype reported a dramatic increase (742% average annual increase over 3 years) in supply chain attacks targeting the pipeline feeding clusters
 * Kubernetes Man-in-the-Middle ([CVE-2020-8554](https://nvd.nist.gov/vuln/detail/cve-2020-8554)): A design quirk, combined with overly permissive RBAC, could allow traffic interception in multi-tenant clusters
 
-
-
 ## Actionable Insights: Practical Steps to Take Now
 
 Here are five practical strategies to immediately improve your Kubernetes security posture:
 
-### - Enforce Least-Privilege Access Everywhere:&#x20;
+### 1- Enforce Least-Privilege Access Everywhere:&#x20;
 
 Audit and lock down RBAC roles, service accounts, and cloud IAM roles. No user should have cluster-admin unless absolutely necessary. Use separate accounts for different components. Periodically use kubectl auth can-i --all-namespaces --list or tools like rback or Polaris to flag overly broad permissions . Apply this to node IAM roles as well.
 
-### - Segment Your Network and Apply Zero Trust:&#x20;
+### 2- Segment Your Network and Apply Zero Trust:&#x20;
 
 Implement NetworkPolicies with a default deny ingress policy in each namespace, then whitelist required flows . If using a service mesh, enable peer authentication (mTLS) . Consider segregating sensitive workloads to dedicated namespaces or nodes.
 
-### - Harden Pod Configurations and Host Nodes:
+### 3- Harden Pod Configurations and Host Nodes:
 
 * Enable Pod Security Admission with at least the baseline profile cluster-wide . Aim for the restricted profile for production
 * Use read-only root filesystems and drop unnecessary Linux capabilities
@@ -92,7 +90,7 @@ Implement NetworkPolicies with a default deny ingress policy in each namespace, 
 * Regularly patch Kubernetes, nodes, and images
 * Consider enabling audit logging on the API server and auditd on nodes
 
-### - Secure Your Software Supply Chain:
+### 4- Secure Your Software Supply Chain:
 
 * Integrate image scanning into CI
 * Use image signing and admission controllers to enforce trusted images
@@ -100,7 +98,7 @@ Implement NetworkPolicies with a default deny ingress policy in each namespace, 
 * Protect CI/CD secrets and limit the scope of CI service accounts
 * Review and update third-party add-ons regularly
 
-### - Use Kubernetes-Focused Security Tools & Automation:
+### 5- Use Kubernetes-Focused Security Tools & Automation:
 
 * Run kube-bench to check against the CIS Benchmark
 * Periodically run `kube-hunter` (in a safe manner!) to probe for weaknesses \[[link](https://www.aquasec.com/news/introducing-kube-hunter-an-open-source-tool-for-discovering-security-issues-in-kubernetes-clusters/)]
