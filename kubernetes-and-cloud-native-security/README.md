@@ -24,9 +24,18 @@ Over the past year, I’ve channeled my passion into developing the [**Kubernete
 
 <details>
 
-<summary>Click here to see all pages</summary>
+<summary>Click here to start your journey</summary>
 
+* [**Cloud Native Security**](broken-reference)
+* [**Kubernetes Cluster Component Security**](broken-reference)
 
+- [**Kubernetes Security Fundamentals**](broken-reference)
+
+* [**Kubernetes Threat Model**](broken-reference)
+
+- [**Platform Security**](broken-reference)
+
+* [**Compliance and Security Frameworks**](broken-reference)
 
 </details>
 
