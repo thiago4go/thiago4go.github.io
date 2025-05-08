@@ -22,6 +22,14 @@ I’m Thiago— a [CNCF Kubestronaut](https://www.cncf.io/training/kubestronaut/
 
 Over the past year, I’ve channeled my passion into developing the [**Kubernetes Security KCSA Mock Exam App**](https://github.com/thiago4go/kubernetes-security-kcsa-mock/). It's already helped thousands of professionals like you build confidence and adopt a security-first approach. We've built a thriving community around the app. Your feedback and contributions have been invaluable in keeping the app accurate and comprehensive – thank you!
 
+<details>
+
+<summary>Click here to see all pages</summary>
+
+
+
+</details>
+
 ### Why the KCSA Mock Exam App?
 
 Preparing for certification exams, particularly those in specialized fields like Kubernetes security, can present significant challenges. It became apparent to me during my own [KCSA ](https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/)exam preparation that there was a gap in available resources.

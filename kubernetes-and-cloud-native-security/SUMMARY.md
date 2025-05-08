@@ -1,5 +1,7 @@
 # Table of contents
 
+## Kubernetes Security
+
 * [Welcome to the Kubernetes Security playbook](README.md)
 
 ## Overview of Cloud Native Security
