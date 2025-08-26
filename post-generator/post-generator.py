@@ -22,9 +22,12 @@ placeholder_values = {
     "{{POST_CONTENT}}": config["POST_CONTENT"],
     "{{POST_CONCLUSION}}": config["POST_CONCLUSION"],
     "{{POST_TAGS}}": config["POST_TAGS"],
-    "{{POST_WORD_COUNT}}": config["POST_WORD_COUNT"]
+    "{{POST_WORD_COUNT}}": config["POST_WORD_COUNT"],
+    "{{OLDER_POST_LINK}}": config.get("OLDER_POST_LINK", ""),
+    "{{OLDER_POST_TITLE}}": config.get("OLDER_POST_TITLE", ""),
+    "{{NEWER_POST_LINK}}": config.get("NEWER_POST_LINK", ""),
+    "{{NEWER_POST_TITLE}}": config.get("NEWER_POST_TITLE", "")
 }
-
 
 # Read the template content
 with open(TEMPLATE_FILE_PATH, 'r') as file:
