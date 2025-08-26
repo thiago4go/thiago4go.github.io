@@ -30,6 +30,35 @@ placeholder_values = {
 with open(TEMPLATE_FILE_PATH, 'r') as file:
     template_content = file.read()
 
+# Handle older and newer post navigation links
+older_link = config.get("OLDER_POST_LINK")
+if older_link:
+    template_content = template_content.replace("{{OLDER_POST_LINK}}", older_link)
+    template_content = template_content.replace(
+        "{{OLDER_POST_TITLE}}", config.get("OLDER_POST_TITLE", "")
+    )
+else:
+    template_content = re.sub(
+        r"\s*<a class=\"prev-post\" href=\"\{\{OLDER_POST_LINK\}\}\"[^>]*>.*?</a>",
+        "",
+        template_content,
+        flags=re.DOTALL,
+    )
+
+newer_link = config.get("NEWER_POST_LINK")
+if newer_link:
+    template_content = template_content.replace("{{NEWER_POST_LINK}}", newer_link)
+    template_content = template_content.replace(
+        "{{NEWER_POST_TITLE}}", config.get("NEWER_POST_TITLE", "")
+    )
+else:
+    template_content = re.sub(
+        r"\s*<a class=\"prev-post\" href=\"\{\{NEWER_POST_LINK\}\}\"[^>]*>.*?</a>",
+        "",
+        template_content,
+        flags=re.DOTALL,
+    )
+
 # Replace placeholders with actual values
 for placeholder, value in placeholder_values.items():
     template_content = template_content.replace(placeholder, value)
