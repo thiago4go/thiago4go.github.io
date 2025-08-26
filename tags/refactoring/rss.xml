@@ -2,17 +2,17 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
       <title>The iNK blot - refactoring</title>
-        <link>https://novemberkilo.com</link>
+        <link>https://thiago4go.github.io</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https://novemberkilo.com/tags/refactoring/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https://thiago4go.github.io/tags/refactoring/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Sun, 27 May 2018 00:00:00 +0000</lastBuildDate>
         <item>
             <title>Refactoring with Applicative - a small example in Haskell</title>
             <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
-            <link>https://novemberkilo.com/posts/refactoring-with-applicative/</link>
-            <guid>https://novemberkilo.com/posts/refactoring-with-applicative/</guid>
+            <link>https://thiago4go.github.io/posts/refactoring-with-applicative/</link>
+            <guid>https://thiago4go.github.io/posts/refactoring-with-applicative/</guid>
             <description>&lt;p&gt;Recently I came across a neat little refactoring example that I thought
 might prove useful, particularly to those starting out with Haskell.&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;setting-the-scene&quot;&gt;Setting the scene&lt;&#x2F;h4&gt;
