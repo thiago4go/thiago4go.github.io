@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://novemberkilo.com/sitemap.xml
+Sitemap: https://thiago4go.github.io/sitemap.xml

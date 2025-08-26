@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://novemberkilo.com/</loc>
+        <loc>https://thiago4go.github.io/</loc>
     </url>
     <url>
-        <loc>https://novemberkilo.com/about/</loc>
+        <loc>https://thiago4go.github.io/about/</loc>
     </url>
     <url>
-        <loc>https://novemberkilo.com/posts/</loc>
+        <loc>https://thiago4go.github.io/posts/</loc>
     </url>
     <url>
-        <loc>https://novemberkilo.com/posts/data-engineering-principles/</loc>
+        <loc>https://thiago4go.github.io/posts/data-engineering-principles/</loc>
         <lastmod>2020-05-25</lastmod>
     </url>
     <url>
-        <loc>https://novemberkilo.com/posts/json-finders/</loc>
+        <loc>https://thiago4go.github.io/posts/json-finders/</loc>
         <lastmod>2014-05-25</lastmod>
     </url>
     <url>
-        <loc>https://novemberkilo.com/posts/refactoring-with-applicative/</loc>
+        <loc>https://thiago4go.github.io/posts/refactoring-with-applicative/</loc>
         <lastmod>2018-05-27</lastmod>
     </url>
     <url>
-        <loc>https://novemberkilo.com/posts/scopes-for-empty-relationships/</loc>
+        <loc>https://thiago4go.github.io/posts/scopes-for-empty-relationships/</loc>
         <lastmod>2013-09-29</lastmod>
     </url>
     <url>
-        <loc>https://novemberkilo.com/tags/</loc>
+        <loc>https://thiago4go.github.io/tags/</loc>
     </url>
     <url>
-        <loc>https://novemberkilo.com/tags/blog/</loc>
+        <loc>https://thiago4go.github.io/tags/blog/</loc>
     </url>
     <url>
-        <loc>https://novemberkilo.com/tags/haskell/</loc>
+        <loc>https://thiago4go.github.io/tags/haskell/</loc>
     </url>
     <url>
-        <loc>https://novemberkilo.com/tags/refactoring/</loc>
+        <loc>https://thiago4go.github.io/tags/refactoring/</loc>
     </url>
 </urlset>
