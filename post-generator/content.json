@@ -8,8 +8,8 @@
     "POST_CONCLUSION": "Learning is an ongoing journey, and embracing it can lead to amazing transformations.",
     "POST_TAGS": "Ongoing Education | Personal Growth | Continuous Learning",
     "POST_WORD_COUNT": "477",
-    "OLDER_POST_LINK": "",
-    "OLDER_POST_TITLE": "",
-    "NEWER_POST_LINK": "",
-    "NEWER_POST_TITLE": ""
+    "OLDER_POST_LINK": "/posts/older-post",
+    "OLDER_POST_TITLE": "Previous Post",
+    "NEWER_POST_LINK": "/posts/newer-post",
+    "NEWER_POST_TITLE": "Next Post"
 }
